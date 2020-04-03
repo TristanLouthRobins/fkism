@@ -12,9 +12,9 @@ view(data)
 # Plot by location 2011-present
 
 new_data_loc <-
-  select(data, Primary_Location, Day, Month, Year, Environment, Quality) 
+  select(data, Location, Day, Month, Year, Environment, Quality) 
 
-new_data_loc <- new_data_loc[ , c("Primary_Location",  "Day", "Year", "Month", "Environment", "Quality")] %>% 
+new_data_loc <- new_data_loc[ , c("Location",  "Day", "Year", "Month", "Environment", "Quality")] %>% 
   unite(Date, Year, Month, Day, sep = "/", remove = TRUE, na.rm = FALSE) %>% 
   arrange(Date) 
 
@@ -22,7 +22,7 @@ new_data_loc$Date <- as.Date(new_data_loc$Date,format="%Y/%m/%d")
 
 ggplot(
   data = new_data_loc,
-  mapping = aes(x = Date, y = Primary_Location, colour = Environment, size = Quality)
+  mapping = aes(x = Date, y = Location, colour = Environment, size = Quality)
 ) +
   geom_point(alpha = 0.5)
 
